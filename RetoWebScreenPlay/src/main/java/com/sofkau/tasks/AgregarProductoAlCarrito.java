@@ -6,21 +6,20 @@ import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 
-import static com.sofkau.ui.PaginaLacteos.*;
+import static com.sofkau.ui.DetalleProductoSeleccionado.AGREGAR_AL_CARRITO;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 
-public class SeleccionarBebidasLacteas implements Task {
+public class AgregarProductoAlCarrito implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                Click.on(BEBIDAS_LACTEAS),
-                Click.on(ORDENAR_POR),
-                Click.on(PRECIO),
-                Click.on(DESCENDENTE)
+                WaitUntil.the(AGREGAR_AL_CARRITO,isClickable()),
+                Scroll.to(AGREGAR_AL_CARRITO),
+                Click.on(AGREGAR_AL_CARRITO)
         );
     }
 
-    public static SeleccionarBebidasLacteas seleccionarBebidasLacteas(){
-        return new SeleccionarBebidasLacteas();
+    public static AgregarProductoAlCarrito agregarProductoAlCarrito(){
+        return new AgregarProductoAlCarrito();
     }
 }

@@ -13,4 +13,8 @@ public class AbrirPaginaInicial implements Task {
                 Open.browserOn(paginaInicial)
         );
     }
+
+    public static AbrirPaginaInicial abrirPaginaInicial(){
+        return new AbrirPaginaInicial();
+    }
 }

@@ -13,9 +13,11 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static com.sofkau.tasks.AbrirPaginaInicial.abrirPaginaInicial;
 import static com.sofkau.tasks.IniciarSesion.iniciarSesion;
 import static com.sofkau.tasks.ElegirCategoriaProducto.elegirCategoriaProducto;
 import static com.sofkau.tasks.SeleccionarBebidasLacteas.seleccionarBebidasLacteas;
+import static com.sofkau.tasks.AgregarProductoAlCarrito.agregarProductoAlCarrito;
 
 public class CompraLaVaquitaStepDefinition extends Configuracion {
     public static Logger LOGGER = Logger.getLogger(CompraLaVaquitaStepDefinition.class);
@@ -26,7 +28,7 @@ public class CompraLaVaquitaStepDefinition extends Configuracion {
         try {
             configurarNavegador();
             theActorInTheSpotlight().wasAbleTo(
-                    new AbrirPaginaInicial()
+                    abrirPaginaInicial()
 
             );
 
@@ -60,11 +62,18 @@ public class CompraLaVaquitaStepDefinition extends Configuracion {
 
     @When("el usuario selecciona un producto para comprar")
     public void elUsuarioSeleccionaUnProductoParaComprar() {
-        theActorInTheSpotlight().attemptsTo(
-            elegirCategoriaProducto(),
-            seleccionarBebidasLacteas()
-
-        );
+       try {
+           theActorInTheSpotlight().attemptsTo(
+                   elegirCategoriaProducto(),
+                   seleccionarBebidasLacteas(),
+                   agregarProductoAlCarrito()
+           );
+       } catch (Exception e){
+           LOGGER.info("Fallo al seleccionar el producto");
+           LOGGER.warn(e.getMessage());
+           Assertions.fail();
+           quitarDriver();
+       }
     }
 
     @Then("deberia visualizar un mensaje para realizar el pago")

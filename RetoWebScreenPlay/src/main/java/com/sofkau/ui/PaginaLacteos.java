@@ -18,4 +18,5 @@ public class PaginaLacteos {
 
     public static final Target ELEGIR_PRODUCTO = Target.the("Elegir producto de mayor precio")
             .located(By.xpath("(//img[@class='product-image-photo'])[1]"));
+
 }
