@@ -15,6 +15,7 @@ import java.util.Properties;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static com.sofkau.tasks.IniciarSesion.iniciarSesion;
 import static com.sofkau.tasks.ElegirCategoriaProducto.elegirCategoriaProducto;
+import static com.sofkau.tasks.SeleccionarBebidasLacteas.seleccionarBebidasLacteas;
 
 public class CompraLaVaquitaStepDefinition extends Configuracion {
     public static Logger LOGGER = Logger.getLogger(CompraLaVaquitaStepDefinition.class);
@@ -60,7 +61,9 @@ public class CompraLaVaquitaStepDefinition extends Configuracion {
     @When("el usuario selecciona un producto para comprar")
     public void elUsuarioSeleccionaUnProductoParaComprar() {
         theActorInTheSpotlight().attemptsTo(
-            elegirCategoriaProducto()
+            elegirCategoriaProducto(),
+            seleccionarBebidasLacteas()
+
         );
     }
 
